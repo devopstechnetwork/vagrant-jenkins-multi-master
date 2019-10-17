@@ -1,0 +1,16 @@
+--- # Playbook to run Jenkins job
+- hosts: all
+  become: true
+  become_method: sudo
+  gather_facts: smart
+  tasks:
+  - name: Include install playbook
+    debug: msg=Hello
+
+  - name: apache2_mod_proxy
+    apache2_mod_proxy:
+      balancer_vhost: localhost:8080
+      member_host: ""
+    register: result
+
+  - debug: var=result
